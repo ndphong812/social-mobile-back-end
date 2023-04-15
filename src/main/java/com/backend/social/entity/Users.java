@@ -3,6 +3,8 @@ package com.backend.social.entity;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Collection;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,18 +14,20 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 @Entity
 @Table(name = "users")
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
 public class Users implements Serializable {
 
 	@Id
@@ -37,11 +41,10 @@ public class Users implements Serializable {
 	private String email;
 	
 	@Column(name="phone",unique = true)
-	@NotBlank
+	@NotBlank(message = "phone not blank")
 	private String phone;
 
 	@Column(name="password")
-	@Size(min = 6,message = "The greatest length of the name is 6")
 	private String password;
 	
 	@Column(name="full_name")
@@ -50,19 +53,16 @@ public class Users implements Serializable {
 	private String fullName;
 	
 	@Column(name="nick_name")
-	@NotBlank
 	private String nickName;
 	
 	@Column(name="avatar")
-	@NotBlank
+	@Size(max = 200)
 	private String avatar;
 	
 	@Column(name="dob")
-	@NotBlank
 	private Date dob;
 	
 	@Column(name="created_at")
-	@NotBlank
 	private Timestamp createdAt;
 	
 	@Column(name="status")
@@ -70,14 +70,10 @@ public class Users implements Serializable {
 	private String status;
 	
 	@Column(name="is_online")
-	@NotBlank
 	private Boolean isOnline;
 	
 	@Column(name="role")
 	@NotBlank
 	private String role;
 
-
-	
-	
 }

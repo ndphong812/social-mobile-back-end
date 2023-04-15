@@ -15,6 +15,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class FriendsId implements Serializable {
-    private Long userId;
-    private Long friendId;
+    private Long user;
+    private Long friend;
 }

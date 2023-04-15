@@ -3,6 +3,7 @@ package com.backend.social.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,6 +40,7 @@ public class Messages implements Serializable {
     private Timestamp sendTime;
 
     @Column(name = "linkFile",nullable = true)
+    @Size(max = 200)
     private String linkFile;
 
     @ManyToOne
@@ -50,15 +52,15 @@ public class Messages implements Serializable {
     private Chats chat;
 
     @ManyToOne
-    @JoinColumn(name = "chat_id",referencedColumnName = "id",nullable = true)
+    @JoinColumn(name = "gchat_id",referencedColumnName = "id",nullable = true)
     private GroupChats groupChat;
 
-    @Column(name = "avatar",nullable = true)
-    private String avatar;
-
-    @Column(name = "fullName")
-    @NotBlank
-    private String fullName;
+//    @Column(name = "avatar",nullable = true)
+//    private String avatar;
+//
+//    @Column(name = "fullName")
+//    @NotBlank
+//    private String fullName;
 
     @Column(name = "type")
     @NotBlank

@@ -1,6 +1,7 @@
 package com.backend.social.entity.idclass;
 
 
+import com.backend.social.entity.Users;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,6 @@ import java.io.Serializable;
 @Setter
 public class BlocksId implements Serializable {
 
-    private Long userId;
-    private Long blockedUserId;
+    private Long user;
+    private Long blockedUser;
 }

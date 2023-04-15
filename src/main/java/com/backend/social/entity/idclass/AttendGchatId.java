@@ -13,6 +13,6 @@ import java.io.Serializable;
 @Setter
 @Getter
 public class AttendGchatId implements Serializable {
-    private Long userId;
-    private Long groupChatId;
+    private Long user;
+    private Long groupChat;
 }

@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -48,13 +47,11 @@ public class Posts {
     @Column(name = "is_deleted")
     private Boolean isDeleted;
 
-    @Column(name = "user_id")
     @ManyToOne
     @JoinColumn(name = "user_id",referencedColumnName = "id")
     @NotNull
     private Users user;
 
-    @Column(name = "shared_post",nullable = true)
     @ManyToOne
     @JoinColumn(name = "shared_post",referencedColumnName = "id")
     private Posts sharedPost;

@@ -1,12 +1,8 @@
 package com.backend.social.entity;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,11 +26,13 @@ public class Chats implements Serializable {
     @NotNull
     private Boolean isDeleted;
 
-    @Column(name = "firstUser")
+    @ManyToOne
+    @JoinColumn(name = "first_user")
     @NotNull
-    private Long firstUser;
+    private Users firstUser;
 
-    @Column(name = "secondUser")
+    @ManyToOne
+    @JoinColumn(name = "second_user")
     @NotNull
-    private Long secondUser;
+    private Users secondUser;
 }

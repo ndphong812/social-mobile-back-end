@@ -22,12 +22,14 @@ import java.io.Serializable;
 public class Reactions implements Serializable {
 
     @Id
-    @Column(name="user_id")
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private Users user;
 
     @Id
-    @Column(name = "post_id")
-    private Long postId;
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Posts post;
 
     @Column(name = "type")
     @NotBlank

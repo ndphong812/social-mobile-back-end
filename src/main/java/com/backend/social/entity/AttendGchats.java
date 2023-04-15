@@ -11,28 +11,23 @@ import lombok.Setter;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "attend_gchat")
+@Table(name = "attend_gchats")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @IdClass(AttendGchatId.class)
-public class AttendGchat implements Serializable {
+public class AttendGchats implements Serializable {
 
     @Id
-    @Column(name = "user_id")
-    private Long userId;
-
-    @Id
-    @Column(name = "groupchat_id")
-    private Long groupChatId;
-
     @ManyToOne
-    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    @JoinColumn(name = "user_id")
     private Users user;
 
+    @Id
     @ManyToOne
-    @JoinColumn(name = "groupchat_id",referencedColumnName = "id")
+    @JoinColumn(name = "groupchat_id")
     private GroupChats groupChat;
+
 
 }

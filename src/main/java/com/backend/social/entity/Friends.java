@@ -20,19 +20,13 @@ import java.io.Serializable;
 public class Friends implements Serializable {
 
     @Id
-    @Column(name = "user_id")
-    private Long userId;
-
-    @Id
-    @Column(name = "friend_id")
-    private Long friendId;
-
     @ManyToOne
-    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    @JoinColumn(name = "user_id")
     private Users user;
 
+    @Id
     @ManyToOne
-    @JoinColumn(name = "friend_id",referencedColumnName = "id")
+    @JoinColumn(name = "friend_id")
     private Users friend;
 
 }

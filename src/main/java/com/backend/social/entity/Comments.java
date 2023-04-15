@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Comments  implements Serializable {
+public class Comments implements Serializable {
 
     @Id
     @Column(name = "id")
@@ -42,6 +43,7 @@ public class Comments  implements Serializable {
     private String content;
 
     @Column(name = "image",nullable = true)
+    @Size(max = 200)
     private String image;
 
     @ManyToOne
@@ -56,9 +58,4 @@ public class Comments  implements Serializable {
     @NotNull
     private Boolean isDeleted;
 
-    @Column(name = "avatar")
-    private String avatar;
-
-    @Column(name = "fullName")
-    private String fullName;
 }

@@ -20,21 +20,13 @@ import java.io.Serializable;
 public class Blocks implements Serializable {
 
     @Id
-    @Column(name = "user_id")
-    private Long userId;
-
-    @Id
-    @Column(name = "blocked_user")
-    private Long blockedUserId;
-
-
     @ManyToOne
-    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    @JoinColumn(name = "user_id")
     private Users user;
 
+    @Id
     @ManyToOne
-    @JoinColumn(name = "blocked_user",referencedColumnName = "id")
+    @JoinColumn(name = "blocked_user")
     private Users blockedUser;
-
 
 }
