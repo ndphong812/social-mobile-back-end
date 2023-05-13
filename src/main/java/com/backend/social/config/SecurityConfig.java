@@ -1,8 +1,7 @@
-package com.backend.social.security.config;
+package com.backend.social.config;
 
 
-import com.backend.social.security.jwt.JwtAuthenticationFilter;
-import jakarta.servlet.Filter;
+import com.backend.social.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,7 +29,7 @@ public class SecurityConfig {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v1/auth/**")
+                .requestMatchers("/api/v1/auth/**","/api/v1/registration/**","/v3/api-docs/**","/swagger-ui/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

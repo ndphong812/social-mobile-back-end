@@ -8,4 +8,6 @@ import java.util.List;
 public interface UserService {
     List<Users> findAll();
 
+    int enableUser(String email);
+
 }

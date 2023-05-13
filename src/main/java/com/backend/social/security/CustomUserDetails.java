@@ -36,9 +36,9 @@ public class CustomUserDetails implements UserDetails {
         return user.getEmail();
     }
 
-    public String getStatus(){
-        return user.getStatus();
-    }
+    public boolean getLocked(){ return user.getLocked();}
+
+    public boolean getEnable(){ return user.getEnable();}
 
     @Override
     public boolean isAccountNonExpired() {

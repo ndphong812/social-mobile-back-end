@@ -19,4 +19,11 @@ public class UserServiceImpl implements UserService {
     public List<Users> findAll() {
         return repo.findAll();
     }
+
+    @Override
+    public int enableUser(String email) {
+        return repo.enableUser(email);
+    }
+
+
 }

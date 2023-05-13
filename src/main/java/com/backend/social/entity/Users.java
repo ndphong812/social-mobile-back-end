@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -45,6 +46,7 @@ public class Users implements Serializable {
 	private String phone;
 
 	@Column(name="password")
+	@Size(min = 6,message = "password must be greater than 6 char")
 	private String password;
 	
 	@Column(name="full_name")
@@ -60,14 +62,17 @@ public class Users implements Serializable {
 	private String avatar;
 	
 	@Column(name="dob")
+	@Past
 	private Date dob;
 	
 	@Column(name="created_at")
 	private Timestamp createdAt;
-	
-	@Column(name="status")
-	@NotBlank
-	private String status;
+
+	@Column(name = "locked")
+	private Boolean locked;
+
+	@Column(name = "enable")
+	private Boolean enable;
 	
 	@Column(name="is_online")
 	private Boolean isOnline;

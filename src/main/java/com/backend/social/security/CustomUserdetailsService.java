@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -20,20 +22,17 @@ public class CustomUserdetailsService implements UserDetailsService {
 
     private final UsersRepo usersRepo;
     @Override
-    public CustomUserDetails loadUserByUsername(String username) throws RuntimeException {
+    public CustomUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Users user=usersRepo.findByEmail(username).get();
+        Optional<Users> user=usersRepo.findByEmail(username);
 
-        if(user == null){
-            throw new  UsernameNotFoundException("User not found");
-        }else if (user.getStatus().replace(" ","").equals(UserConst.STATUS_LOCK)){
-            throw new LockedException("User is locked");
-        }else if(user.getStatus().replace(" ","").equals(UserConst.STATUS_WAIT)){
-            throw new UnverifiedUserException("User is unverified");
-        } else{
-            return CustomUserDetails.builder()
-                .user(usersRepo.findByEmail(username).get())
-                .build();
+        if(!user.isPresent()){
+            // UsernameNotFoundException
+            throw new  UsernameNotFoundException("user not found");
         }
+        return CustomUserDetails.builder()
+            .user(user.get())
+            .build();
+
     }
 }

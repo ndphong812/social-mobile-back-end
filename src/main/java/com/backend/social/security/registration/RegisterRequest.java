@@ -1,4 +1,4 @@
-package com.backend.social.security.auth;
+package com.backend.social.security.registration;
 
 
 import jakarta.annotation.Nullable;
@@ -21,7 +21,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class RegisterRequest {
 
-    @Email
+    @Email(message = "email is valid")
     @NotNull
     private String email;
 
@@ -39,7 +39,6 @@ public class RegisterRequest {
     private String nickName;
 
     private String avatar;
-
 
     @Past
     private Date dob;
