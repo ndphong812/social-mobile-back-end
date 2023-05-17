@@ -30,6 +30,7 @@ public class PostMapper {
 
     private PostsDto convertoPostDto(Posts posts){
         return PostsDto.builder()
+                .id(posts.getId())
                 .like(posts.getLike())
                 .heart(posts.getHeart())
                 .haha(posts.getHaha())
@@ -65,32 +66,7 @@ public class PostMapper {
         return postsDtos;
     }
 
-    // PostsDto to Posts
-//    public Posts toPost(PostsDto dto) throws ResourceNotFoundException{
-//        Optional<Users> userOptional = usersRepo.findById(dto.getOwnerId());
-//        Users user = userOptional.orElseThrow(() -> new ResourceNotFoundException("User not found with id:" + dto.getOwnerId()));
-//
-//        //post is sharing post
-//        if(dto.getSharedPostId() != null){
-//            Optional<Posts> sharedPostOptional= postsRepo.findById(dto.getSharedPostId());
-//            Posts post = sharedPostOptional.orElseThrow(()-> new ResourceNotFoundException("Post not found with id: "+dto.getSharedPostId()));
-//
-//            return Posts.builder()
-//                    .content(dto.getContent())
-//                    .image(dto.getImage())
-//                    .user(user)
-//                    .sharedPost(post)
-//                    .build();
-//        }else {
-//            return Posts.builder()
-//                    .content(dto.getContent())
-//                    .image(dto.getImage())
-//                    .user(user)
-//                    .sharedPost(null)
-//                    .build();
-//        }
-//
-//    }
+
 
     public Posts toPost(PostsDtoRequest dto){
         Optional<Users> userOptional = usersRepo.findById(dto.getOwnerId());
@@ -102,6 +78,7 @@ public class PostMapper {
             Posts post = sharedPostOptional.orElseThrow(()-> new ResourceNotFoundException("Post not found with id: "+dto.getSharedPostId()));
 
             return Posts.builder()
+                    .id(dto.getId())
                     .content(dto.getContent())
                     .image(dto.getImage())
                     .user(user)
@@ -113,6 +90,7 @@ public class PostMapper {
                     .build();
         }else {
             return Posts.builder()
+                    .id(dto.getId())
                     .content(dto.getContent())
                     .image(dto.getImage())
                     .user(user)
