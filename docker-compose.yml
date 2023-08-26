@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  postgresdb:
+    container_name: postgresdb
+    image: postgres:latest
+    restart: on-failure
+    environment:
+      POSTGRES_USER: thanh  # Thay đổi tên người dùng PostgreSQL
+      POSTGRES_PASSWORD: 123456  # Thay đổi mật khẩu của người dùng PostgreSQL
+      POSTGRES_DB: socialdb  # Thay đổi tên của cơ sở dữ liệu
+    volumes:
+      - ./mysql-volume:/var/lib/mysql
+      - ./src/main/resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    networks:
+      springboot-postgre-net:
+
+  spring-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: spring-boot-demo
+    ports:
+      - "8080:8080"
+    restart: on-failure
+    environment:
+      DATABASE_HOST: postgresdb
+      DATABASE_PORT: 5432
+      DATABASE_NAME: socialdb
+      DATABASE_USER: thanh
+      DATABASE_PASSWORD: 123456
+      SPRING_PROFILES_ACTIVE: dev
+    depends_on:
+      - postgresdb
+    networks:
+      springboot-postgre-net:
+
+networks:
+  springboot-postgre-net:
